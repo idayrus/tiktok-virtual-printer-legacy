@@ -99,6 +99,9 @@
 .text-bold {
 	font-weight: bold;
 }
+.text-center {
+	text-align: center;
+}
 .text-caption {
 	font-size: 1.1rem;
 	text-align: center;
