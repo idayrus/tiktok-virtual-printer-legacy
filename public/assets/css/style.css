@@ -127,7 +127,7 @@
 	}
 }
 .animation {
-	background: linear-gradient(-45deg, #ee7752, #23a6d5, #e73c7e, #23d5ab);
+	background: linear-gradient(-45deg, #d66745, #1885ad, #b8265e, #16b48f);
 	background-size: 400% 400%;
 	animation: gradient 10s ease infinite;
 	height: 100vh;
@@ -135,7 +135,7 @@
 	position: fixed;
 	top: 0;
 	bottom: 0;
-	opacity: .3;
+	opacity: .4;
 }
 .blink {
 	animation: blinker 1s infinite;
