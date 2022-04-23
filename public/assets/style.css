@@ -1,0 +1,137 @@
+.debug * {
+	outline: 2px solid red;
+}
+.main {
+	background-color: #ccc;
+}
+.main .info {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 1rem;
+}
+.main .container {
+	background-color: #fff;
+	width: 360px;
+	height: 100vh;
+	margin: auto;
+}
+.background {
+	position:fixed;
+	top:0;
+	bottom:0;
+	object-fit: cover;
+	display:absolute;
+	z-index: 1;
+}
+.printer {
+	background-image: url('printer.png');
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: contain;
+	background-position-x: center;
+	background-position-y: center;
+	height: 100vh;
+	width: 100%;
+	z-index: 1000;
+	position: fixed;
+}
+.printer .table {
+	width: 100%;
+	height: 100%;
+}
+.printer .paper {
+	width: 60%;
+	margin: auto;
+	transform: perspective(500px) rotateX(12deg);
+	margin-top: -9%;
+	filter: grayscale(1);
+	overflow-y: hidden;
+	overflow-x: hidden;
+}
+.printer .item {
+	padding: 1.5rem .75rem;
+	border-top: 2px dashed black;
+	overflow-wrap: break-word !important;
+	word-break: break-all !important;
+}
+.bottom-container {
+	height:32%;
+}
+.bottom-container .bottom-wrapper {
+	padding:2rem;
+}
+.bottom-container .bottom-wrapper .bottom-bar {
+	background: #fff;
+	border-radius: 0.5rem;
+	width: 100%;
+	height: 100%;
+}
+.bottom-container .bottom-wrapper .bottom-bar .bottom-content {
+	padding: .75rem;
+}
+.bottom-content .table {
+	width: 100%;
+	height: 100%;
+}
+.bottom-content .table .td-left {
+	width: 50%;
+	text-align: center;
+	font-size: 1.2rem;
+	vertical-align: middle;
+}
+.bottom-content .table .td-left .text-title {
+	font-weight: bold;
+	padding-top: .25rem;
+	font-size: 1.4rem;
+}
+.bottom-content .table .td-right {
+	width: 50%;
+	text-align: center;
+	vertical-align: top;
+	font-size: 1.2rem;
+}
+.bottom-content .table .td-right .text-guess {
+	font-weight: bold;
+	padding-bottom: .5rem;
+	padding-top: .5rem;
+	margin-bottom: 1rem;
+	font-size: 1.7rem;
+	color: #ad1457 ;
+	border-radius: 5px;
+	border: 2px solid #ad1457 ;
+	text-transform: uppercase;
+}
+.bottom-content .table .td-right .text-winner {
+	font-weight: bold;
+	color: #512da8;
+	margin-top: .25rem;
+	overflow-wrap: break-word !important;
+	word-break: break-all !important;
+	font-size: 1.3rem;
+}
+.text-bold {
+	font-weight: bold;
+}
+.animation {
+	background: linear-gradient(-45deg, #ee7752, #23a6d5, #e73c7e, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 10s ease infinite;
+	height: 100vh;
+	z-index: 2000;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	opacity: .15;
+}
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}

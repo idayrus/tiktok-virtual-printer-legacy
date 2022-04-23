@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Tiktok Printer</title>
+		<meta name="description" content="Tiktok Printer Guess Words Game">
+		<meta name="author" content="adierebel">
+
+		<link rel="stylesheet" href="assets/reset.css?v=1.0">
+		<link rel="stylesheet" href="assets/style.css?v=1.0">
+
+		<script src="assets/jquery.js"></script>
+		<script src="assets/socket.io.js"></script>
+		<script src="assets/connection.js"></script>
+		<script src="assets/words.js"></script>
+		<script src="assets/app.js"></script>
+	</head>
+	<body>
+		<div class="main">
+			<div class="info">
+				<div style="margin-bottom: 1rem;">
+					<input id="targetUsername" type="text" placeholder="Live Username"/>
+					<button id="targetConnect">Connect</button>
+				</div>
+				<div style="margin-bottom: 1rem;">
+					<button id="refreshSize">Reset Size</button>
+				</div>
+				<div id="gameSize">&infin;</div>
+				<div id="stateText">&infin;</div>
+				<div id="soundStatus">Sound: OK</div>
+				<div style="margin-top: 1rem;">
+					<audio id="sfx1" controls style="display: block;margin-top: .5rem">
+						<source src="assets/sounds/printer_comment.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="sfx2" controls style="display: block;margin-top: .5rem">
+						<source src="assets/sounds/printer_gift.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="sfx3" controls style="display: block;margin-top: .5rem">
+						<source src="assets/sounds/printer_winner.mp3" type="audio/mpeg">
+					</audio>
+					<audio id="sfx4" controls style="display: block;margin-top: .5rem">
+						<source src="assets/sounds/yey.mp3" type="audio/mpeg">
+					</audio>
+					<div style="padding-top: .5rem">
+						Note: Play sound first
+					</div>
+				</div>
+			</div>
+			<div class="container">
+				<video class="background" autoplay muted loop>
+					<source src="assets/background.mp4" type="video/mp4">
+				</video>
+				<div class="printer">
+					<table class="table">
+						<tr>
+							<td id="paperContainer">
+								<div id="paper" class="paper"></div>
+							</td>
+						</tr>
+						<tr class="bottom-container">
+							<td class="bottom-wrapper">
+								<div class="bottom-bar">
+									<div class="bottom-content">
+										<table class="table">
+											<tr>
+												<td class="td-left">
+													Guess The Words
+													<div class="text-title">Print Profile Picture</div>
+													<br />
+													🎁 Gift of 30+ Coins<br />for <span class="text-bold">HQ Print</span>
+													<br /><br />
+													Thank you for your support 💖
+												</td>
+												<td class="td-right">
+													<div id="textGuess" class="text-guess">***</div>
+													Latest Winner 👑<br />
+													<div id="textWinner" class="text-winner">&infin;</div>
+												</td>
+											</tr>
+										</table>
+									</div>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<!-- <div class="animation"></div> -->
+			</div>
+		</div>
+	</body>
+</html>
