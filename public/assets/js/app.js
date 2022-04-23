@@ -54,9 +54,10 @@ function loadGame() {
     $("#textGuess").html(censor(selectedWord));
 
     // Timeout
+    let timeout = Number.parseInt(60000 * 5); // 5 Mins
     setTimeout(function() {
         loadGame()
-    }, 60000 * 5); // 5 Mins
+    }, timeout);
 }
 
 function checkWinner(data, msg) {

@@ -25,7 +25,7 @@
 	z-index: 1;
 }
 .printer {
-	background-image: url('printer.png');
+	background-image: url('../media/printer.png');
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-size: contain;
