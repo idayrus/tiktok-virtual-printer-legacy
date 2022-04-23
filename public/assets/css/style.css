@@ -69,6 +69,15 @@
 .bottom-container .bottom-wrapper .bottom-bar .bottom-content {
 	padding: .75rem;
 }
+.mb-3 {
+	margin-bottom: 1rem;
+}
+.mt-2 {
+	margin-top: .5rem
+}
+.d-block {
+	display: block;
+}
 .text-guess {
 	font-weight: bold;
 	padding: .5rem .75rem;
