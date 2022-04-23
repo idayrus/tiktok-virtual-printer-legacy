@@ -120,7 +120,7 @@ function addContent(payload) {
     content.append("<div class='item'>" + payload + "</div>");
 
     // Scroll top bottom
-    content.animate({ scrollTop: content.get(0).scrollHeight}, 200);
+    content.animate({ scrollTop: content.get(0).scrollHeight}, 333);
 }
 
 function addMessage(data, msg) {
