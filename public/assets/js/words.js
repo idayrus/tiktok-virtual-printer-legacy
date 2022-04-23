@@ -1,46 +1,42 @@
 var WORDS = [
-	"tiger",
-	"crocodile",
-	"chicken",
-	"spider",
-	"butterfly",
-	"turtle",
-	"cricket",
-	"rabbit",
-	"cockroach",
-	"dragonfly",
-	"elephant",
-	"squirrel",
-	"chameleon",
-	"donkey",
-	"giraffe",
-	"horse",
-	"monkey",
-	"octopus",
-	"peacock",
-	"shrimp",
-	"apple",
-	"banana",
-	"watermelon",
-	"avocado",
-	"cherry",
-	"chocolate",
-	"coconut",
-	"cucumber",
-	"guava",
-	"pineapple",
-	"strawberry",
-	"swimming",
-	"football",
-	"basketball",
-	"badminton",
-	"baseball",
-	"bowling",
-	"chess",
-	"karate",
-	"marathon",
-	"wrestling",
-	"surfing"
+	"animal|tiger",
+	"animal|crocodile",
+	"animal|chicken",
+	"animal|spider",
+	"animal|butterfly",
+	"animal|turtle",
+	"animal|cricket",
+	"animal|rabbit",
+	"animal|dragonfly",
+	"animal|elephant",
+	"animal|squirrel",
+	"animal|chameleon",
+	"animal|giraffe",
+	"animal|horse",
+	"animal|octopus",
+	"animal|peacock",
+	"animal|shrimp",
+	"fruit|apple",
+	"fruit|watermelon",
+	"fruit|avocado",
+	"fruit|cherry",
+	"fruit|chocolate",
+	"fruit|coconut",
+	"fruit|cucumber",
+	"fruit|guava",
+	"fruit|pineapple",
+	"fruit|strawberry",
+	"sport|swimming",
+	"sport|football",
+	"sport|basketball",
+	"sport|badminton",
+	"sport|baseball",
+	"sport|bowling",
+	"sport|chess",
+	"sport|karate",
+	"sport|marathon",
+	"sport|wrestling",
+	"sport|surfing"
 ]
 
 function censor(word) {
@@ -63,13 +59,21 @@ function censor(word) {
 	return censored.join("");
 }
 
+function copyArray(a) {
+	let b = [];
+	for (i = 0; i < a.length; i++) {
+		b[i] = a[i];
+	}
+	return b;
+}
+
 function shuffle(a) {
-	var j, x, i;
+	let j, x, i;
 	for (i = a.length - 1; i > 0; i--) {
 		j = Math.floor(Math.random() * (i + 1));
 		x = a[i];
 		a[i] = a[j];
 		a[j] = x;
 	}
-	return a;
+	return copyArray(a);
 }

@@ -1,8 +1,8 @@
 // DATA
-let targetLive = "jewa_tiktok";
 let connection = new TikTokIOConnection(undefined);
-let loaderWords = [];
-let selectedWord = null;
+let gameWords = [];
+let gamegameSelectedWord = null;
+let gameTimer = null;
 
 // START
 $(document).ready(() => {
@@ -53,42 +53,78 @@ $(document).ready(() => {
 * GAME PLAY
 */
 
+function countDown() {
+    // Counter
+    let timeleft = 60 * 5; // 5 Mins
+
+    // Clear
+    if (gameTimer != null) {
+        clearInterval(gameTimer);
+    }
+
+    // Start
+    gameTimer = setInterval(function() {
+        // Reset
+        if (timeleft <= 0){
+            clearInterval(gameTimer);
+            loadGame();
+        }
+
+        // Set
+        $("#gameTimeout").html(timeleft.toLocaleString() + "s");
+        timeleft -= 1;
+
+    }, 1000);
+}
+
 function loadGame() {
     // Check
-    if (loaderWords.length < 1) {
-        loaderWords = shuffle(WORDS);
+    if (gameWords.length < 1) {
+        gameWords = shuffle(WORDS);
     }
 
     // Load
-    selectedWord = loaderWords.pop();
+    gameSelectedWord = gameWords.pop();
 
-    // Set
-    $("#textGuess").html(censor(selectedWord));
+    // Set remain words
+    $("#gameWords").html(gameWords.length);
 
-    // Timeout
-    let timeout = Number.parseInt(60000 * 5); // 5 Mins
-    setTimeout(function() {
-        loadGame()
-    }, timeout);
-}
-
-function checkWinner(data, msg) {
     // Check
-    if (selectedWord.toLowerCase() == msg.toLowerCase()) {
-        // Set winner
-        $("#textWinner").html("@" + data.uniqueId);
+    if (typeof gameSelectedWord === 'string') {
+        // Normalize
+        splittedWord = gameSelectedWord.split("|");
+        gameSelectedWord = splittedWord[1];
 
-        // Print Photo
-        addPhoto(data, "winner");
+        // Set
+        $("#textGuess").html("<div style='font-size:70%;padding-bottom:5px;'>" + splittedWord[0] + "</div>" + censor(gameSelectedWord));
 
-        // Sound
-        playSound(4);
+        // Timeout
+        countDown()
 
-        // Reload game
+    } else {
         loadGame();
     }
 }
 
+function checkWinner(data, msg) {
+    // Check type
+    if (typeof gameSelectedWord === 'string' && typeof msg === 'string') {
+        // Check answer
+        if (gameSelectedWord.trim().toLowerCase() == msg.trim().toLowerCase()) {
+            // Set winner
+            $("#textWinner").html("@" + data.uniqueId);
+
+            // Print Photo
+            addPhoto(data, "winner");
+
+            // Sound
+            playSound(4);
+
+            // Reload game
+            loadGame();
+        }
+    }
+}
 
 /*
 * LIVE TIKTOK
@@ -101,7 +137,7 @@ function connect(targetLive) {
         connection.connect(targetLive, {
             enableExtendedGiftInfo: true
         }).then(state => {
-            $('#stateText').text(`Connected to roomId ${state.roomId}`);
+            $('#stateText').text(`Connected to ${state.roomId}`);
         }).catch(errorMessage => {
             $('#stateText').text(errorMessage);
         })
@@ -119,11 +155,7 @@ function isPendingStreak(data) {
 }
 
 function playSound(mode) {
-    try {
-        document.getElementById("sfx"+mode).play();
-    } catch (error) {
-        $("#soundStatus").html("Sund: " + error);
-    }
+    document.getElementById("sfx"+mode).play();
 }
 
 function addContent(payload) {
@@ -166,7 +198,7 @@ function addPhoto(data, mode) {
     } else {
         addContent(
             `<div style="text-align:center;font-size: 1.25rem;">
-                <div style='padding-bottom:.25rem;'>Thanks for ordering HQ Print</div>
+                <div style='padding-bottom:.25rem;'>Thanks for ordering Special Print</div>
                 <div style='padding-bottom:.5rem;font-weight: bold;'>`+userName+`</div>
                 <div>
                     <img src="`+userAvatar+`" style="width:128px;height:128px;border-radius: 15px;"/>

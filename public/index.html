@@ -26,9 +26,12 @@
 				<div style="margin-bottom: 1rem;">
 					<button id="refreshSize">Reset Size</button>
 				</div>
-				<div id="gameSize">&infin;</div>
-				<div id="stateText">&infin;</div>
-				<div id="soundStatus">Sound: OK</div>
+				<table>
+					<tr><td>Canvas</td><td>&nbsp;:&nbsp;</td><td id="gameSize">&infin;</td></tr>
+					<tr><td>Status</td><td>&nbsp;:&nbsp;</td><td id="stateText">&infin;</td></tr>
+					<tr><td>Timeout</td><td>&nbsp;:&nbsp;</td><td id="gameTimeout">&infin;</td></tr>
+					<tr><td>Words</td><td>&nbsp;:&nbsp;</td><td id="gameWords">&infin;</td></tr>
+				</table>
 				<div style="margin-top: 1rem;">
 					<audio id="sfx1" controls style="display: block;margin-top: .5rem">
 						<source src="assets/sounds/printer_comment.mp3" type="audio/mpeg">
