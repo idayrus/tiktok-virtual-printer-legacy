@@ -15,7 +15,14 @@ $(document).ready(() => {
         $(".background").outerWidth(width);
         $(".printer").outerWidth(width);
         $(".animation").outerWidth(width);
-        $("#paper").outerHeight($("#paperContainer").outerHeight() - 20);
+
+        // Paper
+        if (window.innerWidth >= 1366) {
+            var paperHeight = $("#paperContainer").outerHeight() - 20;
+        } else {
+            var paperHeight = $("#paperContainer").outerHeight() + 7;
+        }
+        $("#paper").outerHeight(paperHeight);
     }
     resizeContainer();
     $(window).resize(function() {
@@ -35,6 +42,11 @@ $(document).ready(() => {
         let targetLive = $("#targetUsername").val();
         connect(targetLive);
     });
+
+    // Populate dummy
+    for (let i = 0; i < 30; i++) {
+        addContent("<div style='text-align:center;'>Welcome 🥳🥳🥳</div>");
+    }
 })
 
 /*
@@ -43,7 +55,7 @@ $(document).ready(() => {
 
 function loadGame() {
     // Check
-    if (loaderWords.length <= 0) {
+    if (loaderWords.length < 1) {
         loaderWords = shuffle(WORDS);
     }
 
@@ -176,7 +188,7 @@ function addGift(data) {
     let giftTotal = (data.diamondCount * data.repeatCount);
 
     // Check
-    if (giftTotal >= 30) {
+    if (giftTotal >= 10) {
         // Print Photo
         addPhoto(data);
 
