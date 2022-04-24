@@ -6,22 +6,28 @@
 		<title>Tiktok Printer</title>
 		<meta name="description" content="Tiktok Printer Guess Words Game">
 		<meta name="author" content="adierebel">
-		<link rel="stylesheet" href="assets/css/reset.css?v=1.0">
-		<link rel="stylesheet" href="assets/css/style.css?v=1.0">
-		<script src="assets/js/jquery.js"></script>
-		<script src="assets/js/socket.io.js"></script>
-		<script src="assets/js/connection.js"></script>
-		<script src="assets/js/words_in.js"></script>
-		<script src="assets/js/app.js"></script>
+		<link rel="stylesheet" href="../assets/css/reset.css?v=1.0">
+		<link rel="stylesheet" href="../assets/css/style.css?v=1.0">
+		<script type="text/javascript" src="words_in.js"></script>
+		<script type="text/javascript" src="msg_in.js"></script>
+		<script type="text/javascript" src="../assets/tts/speakClient.js"></script>
+		<script type="text/javascript" src="../assets/js/jquery.js"></script>
+		<script type="text/javascript" src="../assets/js/socket.io.js"></script>
+		<script type="text/javascript" src="../assets/js/connection.js"></script>
+		<script type="text/javascript" src="../assets/js/app.js"></script>
 	</head>
 	<body>
 		<div class="main">
 			<div class="info">
 				<div class="mb-3">
-					<input id="targetUsername" type="text" placeholder="Live Username"/>
+					<a href="/">MENU</a>
+				</div>
+				<div class="mb-3">
+					<input id="targetUsername" type="text" placeholder="Live @username"/>
 					<button id="targetConnect">Connect</button>
 				</div>
 				<div class="mb-3">
+					<button id="btnPrepare">PREPARE</button>
 					<button id="refreshSize">Reset Size</button>
 				</div>
 				<table>
@@ -32,25 +38,26 @@
 				</table>
 				<div style="margin-top: 1rem;">
 					<audio id="sfx1" controls class="d-block mt-2">
-						<source src="assets/sounds/printer_comment.mp3" type="audio/mpeg">
+						<source src="../assets/sounds/printer_comment.mp3" type="audio/mpeg">
 					</audio>
 					<audio id="sfx2" controls class="d-block mt-2">
-						<source src="assets/sounds/printer_gift.mp3" type="audio/mpeg">
+						<source src="../assets/sounds/printer_gift.mp3" type="audio/mpeg">
 					</audio>
 					<audio id="sfx3" controls class="d-block mt-2">
-						<source src="assets/sounds/printer_winner.mp3" type="audio/mpeg">
+						<source src="../assets/sounds/printer_winner.mp3" type="audio/mpeg">
 					</audio>
 					<audio id="sfx4" controls class="d-block mt-2">
-						<source src="assets/sounds/yey.mp3" type="audio/mpeg">
+						<source src="../assets/sounds/yey.mp3" type="audio/mpeg">
 					</audio>
+					<audio id="tts" controls class="d-block mt-2"></audio>
 					<div class="mt-2">
-						Note: Main suara terlebih dahulu
+						Note: Mainkan suara terlebih dahulu
 					</div>
 				</div>
 			</div>
 			<div class="container">
 				<video class="background" autoplay muted loop>
-					<source src="assets/media/background.mp4" type="video/mp4">
+					<source src="../assets/media/background.mp4" type="video/mp4">
 				</video>
 				<div class="printer">
 					<table class="table">
@@ -64,7 +71,7 @@
 								<div class="bottom-bar">
 									<div class="bottom-content">
 										<div id="textGuess" class="text-guess blink">***</div>
-										<div class="text-caption">🎁 Gift 10+ koin untuk <span class="text-bold">Print Spesial</span></div>
+										<div class="text-caption">💬 Komentar <span class="text-bold">/ngomong</span> <i>`teks kamu`</i></div>
 										<div class="text-caption" style="margin-bottom: 0rem;">🙋‍♀️🙋‍♂️ Tebak kata diatas untuk mencetak foto kamu</div>
 									</div>
 								</div>

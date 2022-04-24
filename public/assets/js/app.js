@@ -29,29 +29,51 @@ $(document).ready(() => {
         resizeContainer();
     });
 
-    // Load game
-    loadGame();
-
-    // Resize
-    $("#refreshSize").click(function(e) {
-        resizeContainer();
-    });
-
     // Connect
     $("#targetConnect").click(function(e) {
         let targetLive = $("#targetUsername").val();
         connect(targetLive);
     });
 
-    // Populate dummy
-    for (let i = 0; i < 30; i++) {
-        addContent("<div style='text-align:center;'>Welcome 🥳🥳🥳</div>");
-    }
+    // Resize
+    $("#refreshSize").click(function(e) {
+        resizeContainer();
+    });
+
+    // Test
+    $("#btnPrepare").click(function(e) {
+        // Check sound
+        playSound(1);
+        playSound(2);
+        playSound(3);
+        playSound(4);
+        speakTTS(MSG_TEST);
+
+        // Populate dummy
+        for (let i = 0; i < 30; i++) {
+            addContent("<div style='text-align:center;'>Welcome 🥳🥳🥳</div>");
+        }
+
+        // Load game
+        loadGame();
+    
+    });
+
+    
 })
 
 /*
 * GAME PLAY
 */
+
+function speakTTS(msg) {
+    speak(msg, {
+        amplitude: 100,
+        pitch: 100,
+        speed: 150,
+        wordgap: 5
+    });
+}
 
 function censor(word) {
     let censored = [];
@@ -151,14 +173,15 @@ function checkWinner(data, msg) {
     if (typeof gameSelectedWord === 'string' && typeof msg === 'string') {
         // Check answer
         if (gameSelectedWord.trim().toLowerCase() == msg.trim().toLowerCase()) {
-            // Set winner
-            $("#textWinner").html("@" + data.uniqueId);
-
             // Print Photo
             addPhoto(data, "winner");
 
             // Sound
             playSound(4);
+
+            // Play TTS
+            let tssMsg = MSG_WINNER.replace("|username|", data.uniqueId);
+            speakTTS(tssMsg);
 
             // Reload game
             loadGame();
@@ -212,11 +235,20 @@ function addMessage(data, msg) {
     let userName = data.uniqueId;
     let message = sanitize(msg);
 
-    // Add
-    addContent("<span style='font-weight: bold;'>" + userName + "</span>: " + message);
+    // Check for voice
+    let command = message.split(" ")[0];
+    if (command == "/say" || command == "/ngomong") {
+        // TTS
+        let cleanText = message.replace("/say", "").replace("/ngomong", "");
+        speakTTS(cleanText);
 
-    // Sound
-    playSound(1);
+    } else {
+        // Add
+        addContent("<span style='font-weight: bold;'>" + userName + "</span>: " + message);
+
+        // Sound
+        playSound(1);
+    }
 }
 
 function addPhoto(data, mode) {
@@ -274,6 +306,10 @@ function addGift(data) {
 
         // Sound
         playSound(2);
+
+        // Play TTS
+        let tssMsg = MSG_GIFT.replace("|username|", userName);
+        speakTTS(tssMsg);
     }
 }
 
@@ -292,14 +328,29 @@ connection.on('gift', (data) => {
 
 // Like
 connection.on('like', (data) => {
-    if (typeof data.likeCount === 'number') {
-        addMessage(data, data.label.replace('{0:user}', '').replace('likes', `${data.likeCount} likes`));
+    if (typeof data.totalLikeCount === 'number') {
+        // addMessage(data, data.label.replace('{0:user}', '').replace('likes', `${data.likeCount} likes`));
     }
 })
 
 // Share, Follow
 connection.on('social', (data) => {
     addMessage(data, data.label.replace('{0:user}', ''));
+})
+
+// Member join
+let joinMsgDelay = 0;
+connection.on('member', (data) => {
+    let addDelay = 250;
+    if (joinMsgDelay > 500) addDelay = 100;
+    if (joinMsgDelay > 1000) addDelay = 0;
+
+    joinMsgDelay += addDelay;
+
+    setTimeout(() => {
+        joinMsgDelay -= addDelay;
+        // addMessage(data, "joined");
+    }, joinMsgDelay);
 })
 
 // End
