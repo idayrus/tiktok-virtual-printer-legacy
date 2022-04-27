@@ -112,7 +112,7 @@
 	font-size: 1.1rem;
 	padding: 1rem .5rem;
 }
-@media only screen and (min-width: 1366px) {
+@media only screen and (min-width: 1400px) {
 	.text-caption {
 		font-size: 1.7rem;
 		margin-top: 2rem;
