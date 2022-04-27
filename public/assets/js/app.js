@@ -3,6 +3,13 @@ let connection = new TikTokIOConnection(undefined);
 let gameWords = [];
 let gamegameSelectedWord = null;
 let gameTimer = null;
+let gameStatus = false;
+
+// Config
+let confComment = false;
+let confLike = false;
+let confShare = false;
+let confJoin = false;
 
 // START
 $(document).ready(() => {
@@ -31,13 +38,14 @@ $(document).ready(() => {
 
     // Connect
     $("#targetConnect").click(function(e) {
-        let targetLive = $("#targetUsername").val();
-        connect(targetLive);
-    });
-
-    // Resize
-    $("#refreshSize").click(function(e) {
-        resizeContainer();
+        // Check
+        if (gameStatus) {
+            let targetLive = $("#targetUsername").val();
+            connect(targetLive);
+        } else {
+            alert("Start game first!");
+        }
+        
     });
 
     // Test
@@ -56,10 +64,18 @@ $(document).ready(() => {
 
         // Load game
         loadGame();
-    
+
+        // Setting
+        loadSetting();
+
+        // Set
+        gameStatus = true;
     });
 
-    
+    // Save config
+    $("#btnSave").click(function(e) {
+        loadSetting();
+    });
 })
 
 /*
@@ -113,7 +129,6 @@ function shuffle(a) {
     }
     return copyArray(a);
 }
-
 
 function countDown() {
     // Counter
@@ -189,6 +204,14 @@ function checkWinner(data, msg) {
     }
 }
 
+function loadSetting() {
+    // Load
+    confComment = $("#confComment").prop('checked');
+    confLike = $("#confLike").prop('checked');
+    confShare = $("#confShare").prop('checked');
+    confJoin = $("#confJoin").prop('checked');
+}
+
 /*
 * LIVE TIKTOK
 */
@@ -200,12 +223,12 @@ function connect(targetLive) {
         connection.connect(targetLive, {
             enableExtendedGiftInfo: true
         }).then(state => {
-            $('#stateText').text(`Connected to ${state.roomId}`);
+            $('#stateText').text(`Connected ${state.roomId}`);
         }).catch(errorMessage => {
             $('#stateText').text(errorMessage);
         })
     } else {
-        alert('no username entered');
+        alert('Enter username first!');
     }
 }
 
@@ -243,11 +266,15 @@ function addMessage(data, msg) {
         speakTTS(cleanText);
 
     } else {
-        // Add
-        addContent("<span style='font-weight: bold;'>" + userName + "</span>: " + message);
+        // Check setting
+        if (confComment) {
+            // Add
+            addContent("<span style='font-weight: bold;'>" + userName + "</span>: " + message);
 
-        // Sound
-        playSound(1);
+            // Sound
+            playSound(1);
+        }
+        
     }
 }
 
@@ -329,13 +356,21 @@ connection.on('gift', (data) => {
 // Like
 connection.on('like', (data) => {
     if (typeof data.totalLikeCount === 'number') {
-        // addMessage(data, data.label.replace('{0:user}', '').replace('likes', `${data.likeCount} likes`));
+        // Check setting
+        if (confLike) {
+            // Print like
+            addMessage(data, data.label.replace('{0:user}', '').replace('likes', `${data.likeCount} likes`));
+        }
     }
 })
 
 // Share, Follow
 connection.on('social', (data) => {
-    addMessage(data, data.label.replace('{0:user}', ''));
+    // Check setting
+    if (confShare) {
+        // Print share
+        addMessage(data, data.label.replace('{0:user}', ''));
+    }
 })
 
 // Member join
@@ -349,7 +384,11 @@ connection.on('member', (data) => {
 
     setTimeout(() => {
         joinMsgDelay -= addDelay;
-        // addMessage(data, "joined");
+        // Check setting
+        if (confJoin) {
+            // Print join
+            addMessage(data, "joined");
+        }
     }, joinMsgDelay);
 })
 
