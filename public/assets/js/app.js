@@ -101,7 +101,10 @@ function censor(word) {
 
     for (let i = 0; i < length; i++) {
         let c = word.charAt(i);
-        if (i >= range_start && i <= range_end) {
+        if (i >= range_start && i <= range_end && c === " ") {
+            censored.push(" ");
+        }
+        else if (i >= range_start && i <= range_end) {
             censored.push("*");
         } else {
             censored.push(c);
