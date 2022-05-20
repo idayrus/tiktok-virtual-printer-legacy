@@ -1,4 +1,6 @@
-# Tiktok Printer
+# Virtual Printer for TikTok Interactive LIVE Stream
+
+This is free and open source version of TikTok Virtual Printer, this software is no longer supported. If you want new version, go to www.gemtok.live
 
 ## How To
 
@@ -14,13 +16,11 @@
 - Click button <kbd>START GAME</kbd>
 - Enter your tiktok username and click <kbd>Connect</kbd>
 
-### Add language
+### Edit language
 
-- Enter folder `/public/lang/`
-- Create new file `game_XXX.html`, `words_XXX.js`, & `msg_XXX.js`
-- Copy content from another language
+- Edit words list on `/public/words.js`
+- Edit TTS message on `/public/msg.js`
 - Translate content into your language
-
 
 ## Features
 
