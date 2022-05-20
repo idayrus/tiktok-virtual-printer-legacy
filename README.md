@@ -1,6 +1,16 @@
 # Virtual Printer for TikTok Interactive LIVE Stream
 
-This is free and open source version of TikTok Virtual Printer, this software is no longer supported. If you want new version, go to www.gemtok.live
+This is free and open source version of TikTok Virtual Printer.
+
+---
+
+### THIS REPO IS NO LONGER MAINTAINED. THIS IS FREE VERSION, PLEASE DON'T RESELL WITHOUT OUR PERMISSION!
+
+---
+
+### If you want the latest version and future update, please contact https://wa.me/13239168464
+
+---
 
 ## How To
 
