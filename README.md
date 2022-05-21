@@ -8,7 +8,7 @@ This is free and open source version of TikTok Virtual Printer.
 
 ---
 
-### If you want the latest version and future update, please contact https://wa.me/13239168464
+### If you want the latest version and future update, you can check https://play.gemtok.live/
 
 ---
 
