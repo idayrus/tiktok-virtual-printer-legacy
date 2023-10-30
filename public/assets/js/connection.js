@@ -4,7 +4,7 @@
  */
  class TikTokIOConnection {
     constructor(backendUrl) {
-        this.socket = io(backendUrl);
+        this.socket = io('https://tiktok-chat-reader.zerody.one/');
         this.uniqueId = null;
         this.options = null;
 
