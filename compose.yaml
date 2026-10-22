@@ -1,0 +1,10 @@
+services:
+  tiktok-printer:
+    build: .
+    container_name: tiktok-virtual-printer
+    restart: unless-stopped
+    environment:
+      RECAPTCHA_SITE_KEY: ${RECAPTCHA_SITE_KEY:-}
+      RECAPTCHA_SECRET_KEY: ${RECAPTCHA_SECRET_KEY:-}
+    ports:
+      - "127.0.0.1:8081:8081"
